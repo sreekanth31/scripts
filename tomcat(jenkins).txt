@@ -1,0 +1,76 @@
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+ ****STEP 1****
+ ssh -i clb.pem ubuntu@..........
+ java -version
+ 
+ 
+ we donot use yum(rhel), we use only apt-get(ubuntu)
+ 
+ * apt-get update
+ * apt-get install java*
+ * apt-get install jenkins*
+ 
+ * find / -name jenkins
+ apt-get install apache2
+ curl http://localhost
+ apt-get remove apache2
+ * apt-get remove java*
+ * java -version 
+ 
+{{goto http://www.oracle.com/technetwork/java/javase/downloads/index.html
+
+link adress:- http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.tar.gz
+get error}}
+
+* wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
+* ls -ltr
+* tar -zxvf <packagename>
+  cd packagename
+  ls -ltrh
+  chown -R root.root *
+  ls -ltrh
+  cd bin
+  ls -l java
+  cd /bin
+  ln -s /tmp/jdk/bin/java java
+  echo $PATH
+  /tmp/jdk1.8.0_131/bin
+  cd
+  vi .bashrc
+  (end of line)export PATH=$PATH:/tmp/jdk1.8.0_131/bin :wq!
+  source .bashrc
+  -----------------------------------------------------
+  ***STEP2***
+  tomcat.apche.org
+  tomcat8 64bit-windows.zip
+  cd /opt/
+  wget http://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.32/bin/apache-tomcat-8.5.32-windows-x64.zip
+  unzip
+  start tomcat-- sh startup.sh
+  chmod 700 *.sh
+  sh startup.sh
+  ps -ef | grep tomcat
+  netstat -anlp | grep ":8080"
+  give inbound rules as custom http 8080 anywhere
+  access through internet 
+ * create loadbalancer for jenkins
+   http 80(loadbalancer port) http 8080(instance port) 
+   create security assign group--->select loadbalancer-sg
+   goto jenkins securitygroup--inbound---tcp 8080 loadbalancer-sg 
+   edit health check--remove index.html(put only /)
+   access with loadbalancer dns server
+  ----------------------------------------------------------
+  remove the dirctories in webapps(rm -rf *)
+  cd /opt/apache-tomcat-8/webapps
+  wget https://updates.jenkins-ci.org/download/war/2.130/jenkins.war
+  cd jenkins
+  curl http://localhost:8080/jenkins(if not works)then
+  wget http://           ''
+  change inbound rule for jenkins as tcp 8080 anywhere
+  jenkins dns
+  access as <url>:8080/jenkins
+  cat /root/.jenkins/secrets/initialAdminPassword
+  Done!!!
+  
+  
