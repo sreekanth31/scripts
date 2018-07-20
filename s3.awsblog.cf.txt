@@ -1,0 +1,21 @@
+upload video in s3 bucket ,mapping with route53
+
+step1:goto aws s3 resource console
+     - create bucket (enter DNS compliant bucketname)i.e bucketname same as the domainname
+	  -upload file(ex:video.mp4)
+	   -then move to properities--click static webhosting--give index name as filename(i.e uploaded filename(video.mp4) is equal to indexname(video.mp4)
+	    -click permissions---give public access
+		 -verify again(don't forget to make public by clicking on filename)
+		 
+step2:goto route53 resource console
+     -click hosted zone which created
+	  -select the domain name,goto record sets
+	   -create record sets 
+	        give name as bucketname which u have created in s3
+			alias - yes
+			click on create
+			 
+	   
+	  
+	  
+	  
