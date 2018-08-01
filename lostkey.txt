@@ -1,0 +1,22 @@
+Steps & Commands,
+
+# Stop server-without-keys and detach the root volume
+# Start another serve which has keys and ensure they run the same operating system as previous server, say RedHat Linux
+# Attach the root volume another server to the 'server-without-keys' 
+
+# Create the Mount Point
+mkdir -p /var/recovery-disk
+
+# Mount the disk
+mount -o nouuid /dev/xvdf2 /var/recovery-disk
+
+# Copy over the authorized keys
+cp /home/ec2-user/.ssh/authorized_keys  /var/recovery-disk/home/ec2-user/.ssh/authorized_keys
+
+# Unmount the disk
+umount /var/recovery-disk
+
+# Attach from AWS GUI Console to server as root disk. For example: /dev/sda
+
+# Connect with Keys
+
