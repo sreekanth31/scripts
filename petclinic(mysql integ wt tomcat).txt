@@ -1,0 +1,73 @@
+#!/bin/bash
+#to change hostname
+servername=bastion
+echo "set hostname as $servername"
+echo "$servername" >/etc/hostname
+
+#privateip=$((ifconfig eth0 | grep -w 'inet' | awk '{print $2}'))
+privateip=$(hostname -I)
+echo "$privateip $servername" >>/etc/hosts
+hostname -F /etc/hostname
+echo "your servername is :`hostname` "
+echo "your servername is :$HOSTNAME "
+
+prerequisite
+=====================
+java--->wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
+        tar -zxvf jdk-8u131-linux-x64.tar.gz  
+        mv jdk1.8.0_131 jdk
+		cd jdk
+		chown -R root:root *
+		cd /bin
+		/tmp/jdk/bin
+		cd 
+		ls -al
+		vi .bashrc
+		export PATH=$PATH:/tmp/jdk/bin    :wq!
+		source .bashrc
+
+tomcat--->http://redrockdigimark.com/apachemirror/tomcat/tomcat-8/v8.5.32/bin/apache-tomcat-8.5.32-windows-x64.zip
+	      unzip apache-tomcat-8.5.32-windows-x64.zip
+		  mv apache-tomcat-8.5.32 tomcat
+		  sed -i 's/8080/80/g' /opt/tomcat/conf/server.xml
+		  cd tomcat/bin
+		  chmod 700 *.sh
+		  ./startup.sh
+		  
+mysql---wget https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
+        rpm -ivh mysql80-community-release-el7-1.noarch.rpm
+		yum install mysql-server*
+		service mysqld start
+		vi /var/log/mysqld.log---->uw!zCT.St8M?    to execute:- mysql -u root -p
+		                                                     (or)
+		                                            mysql_secure_installation
+        #if it is failure 
+        mysql -h localhost -u root -p
+
+        #(optional)
+        #if failure
+        SET GLOBAL validate_password.policy = 0;
+		
+		#check show database
+         show databases;
+         mysql -h localhost -u root -p
+         #if you get error
+
+		mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'uw!zCT.St8M?';
+		cd /opt/tomcat/webapps/petclinic/WEB-INF/classes/db/mysql/ --->update initDB.sql
+		/opt/tomcat/webapps/petclinic/WEB-INF/classes/spring --->update data-access.properities
+		
+warfile---http://cliqr-appstore.s3.amazonaws.com/petclinic/petclinic.war
+
+connector jar---https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.12.zip
+
+show databases;
+create database petclinic;
+use petclinic;
+show tables;
+
+http://ec2-13-232-218-239.ap-south-1.compute.amazonaws.com:8080/petclinic/
+
+
+
+				
