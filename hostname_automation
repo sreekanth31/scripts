@@ -1,0 +1,10 @@
+#!/bin/bash
+#to change hostname
+servername=<enter ur own hostname"
+echo "you are going to set hostname is $servername"
+echo "$servername" >/etc/hostname
+privateip=$(hostname -I)
+echo "$privateip $servername" >>/etc/hosts
+hostname -F /etc/hostname
+echo "your servername is :`hostname` "
+echo "your servername is :$HOSTNAME "
