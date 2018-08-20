@@ -1,16 +1,4 @@
 #!/bin/bash
-#to change hostname
-servername=bastion
-echo "set hostname as $servername"
-echo "$servername" >/etc/hostname
-
-#privateip=$((ifconfig eth0 | grep -w 'inet' | awk '{print $2}'))
-privateip=$(hostname -I)
-echo "$privateip $servername" >>/etc/hosts
-hostname -F /etc/hostname
-echo "your servername is :`hostname` "
-echo "your servername is :$HOSTNAME "
-
 prerequisite
 =====================
 java--->wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
