@@ -6,10 +6,9 @@ rpm -ivh jdk-8u131-linux-x64.rpm
 wget http://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.32/bin/apache-tomcat-8.5.32-windows-x64.zip
 unzip apache-tomcat-8.5.32-windows-x64.zip
 mv apache-tomcat-8.5.32 /opt/tomcat
-chmod -R 755 /opt/tomcat/
+chmod -R 755 /opt/tomcat/bin
 rm -rf /opt/tomcat/webapps/*
 sed -i 's/8080/80/g' /opt/tomcat/conf/server.xml
-/opt/tomcat/bin/startup.sh
 # Install Mysql Database.
 #install the mysql
 wget http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm
@@ -20,10 +19,14 @@ service mysqld start
 wget http://cliqr-appstore.s3.amazonaws.com/petclinic/petclinic.war
 cp petclinic.war /opt/tomcat/webapps/
 /opt/tomcat/bin/startup.shutdown.sh
-cp /opt/tomcat/webapps/petclinic/WEB-INF/classes/db/mysql/initDB.sql initDB.sql.backup
-cp /opt/tomcat/webapps/petclinic/WEB-INF/classes/spring/data-access.properties data-access.properties.backup
+mv /opt/tomcat/webapps/petclinic/WEB-INF/classes/db/mysql/initDB.sql /tmp/initDB.sql.backup
+mv /opt/tomcat/webapps/petclinic/WEB-INF/classes/spring/data-access.properties /tmp/data-access.properties.backup
 rm -f /opt/tomcat/webapps/petclinic/WEB-INF/classes/db/mysql/initDB.sql
 rm -f /opt/tomcat/webapps/petclinic/WEB-INF/classes/spring/data-access.properties
+/opt/tomcat/webapps/petclinic/WEB-INF/classes/db/mysql/
+wget https://s3.amazonaws.com/mysqldatabaseiniti/initDB.sql 
+/opt/tomcat/webapps/petclinic/WEB-INF/classes/db/mysql/
+https://s3.amazonaws.com/mysqldatabaseiniti/data-access.properties 
 wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.12.zip
 unzip mysql-connector-java-8.0.12.zip
 cp mysql-connector-java-8.0.12/mysql-connector-java-8.0.12.jar /opt/tomcat/lib/
