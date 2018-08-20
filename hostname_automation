@@ -1,6 +1,6 @@
 #!/bin/bash
 #to change hostname
-servername=<enter ur own hostname"
+servername=<enter ur required hostname>"
 echo "you are going to set hostname is $servername"
 echo "$servername" >/etc/hostname
 privateip=$(hostname -I)
