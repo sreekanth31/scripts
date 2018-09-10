@@ -1,0 +1,6 @@
+#!bin/bash
+sudo yum install wget unzip -y
+cd /tmp
+wget http://mirrors.fibergrid.in/apache//ant/binaries/apache-ant-1.9.13-bin.zip
+unzip apache-ant-1.9.13-bin.zip
+mv apache-ant-1.9.13 /opt/ant
