@@ -1,0 +1,77 @@
+
+
+lamp.yml
+
+---
+- hosts: all
+  sudo: true
+  tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+    - name: install apache
+      apt: name=apache2 state=present
+    - name: install mysql
+      apt: name=mysql-server state=present
+    - name: install php
+      apt: name=php5 state=present
+	  
+	  
+<?php phpinfo();  /var/www/html 
+
+
+Refactoring:
+
+A Standard Loop uses a 'with_items:' key in your YAML list, and allows you to perform the same action on a list of items. 
+In our case, we have a list of packages we want to install. It looks something like this:
+
+---
+- hosts: all
+  sudo: true
+  tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+    - name: install required packages
+      apt: name={{ item }} state=present
+      with_items:
+        - apache2
+        - mysql-server
+        - php5
+		
+
+In Ansible, even though 'include:' is technically a language construct, it behaves exactly like a module would. 
+You include it as a task with some key-value pair parameters.
+
+Now, let's create our individual task files that we're going to include in our playbook. 
+Start by adding a new directory called 'tasks' and then add the following three files:
+
+In 'tasks/apache.yml':
+---
+- name: install apache
+  apt: name=apache2 state=present
+  
+and 'tasks/mysql.yml':
+---
+- name: install mysql
+  apt: name=mysql-server state=present
+  
+and finally 'tasks/php.yml':
+---
+- name: install php
+  apt: name=php5 state=present
+  
+Now, we need to update our playbook to include these new files. Change your lamp.yml file to match the following:
+
+---
+- hosts: all
+  sudo: true
+  tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+    - include: tasks/apache.yml
+    - include: tasks/mysql.yml
+    - include: tasks/php.yml
+	
+Handlers are a list of Tasks with a name assigned that you can call by name after another Task has run. 
+They won't run unless another Task triggers them.
+
+
