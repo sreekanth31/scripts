@@ -1,8 +1,8 @@
 #ansible 
 
-#First you have to enable ephel
+#First you have to enable epel
 
-#enable ephel
+#enable epel
 --> yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 then update yum
@@ -50,13 +50,13 @@ Ex:
 [slave]
 172.**.**.**
 
-to check connection to onathor server 
+to check connection to another server 
 ----> ansible -m ping 172.**.**.** (or) ansible -m ping slave
 
-to install apache in remote server(salve)
-----> ansible slsve -m yum -a "name=httpd state=present"
+to install apache in remote server(slave)
+----> ansible slave -m yum -a "name=httpd state=present"
 
-to start apache in remote server(salve)
+to start apache in remote server(slave)
 -----> ansible slave -m yum -a "name=httpd state=restarted"
 
 it automatically installed apache in remote (slave) server
