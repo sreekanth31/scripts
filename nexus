@@ -1,8 +1,8 @@
 download nexus in your local
 https://www.sonatype.com/oss-thank-you-zip
-then copy to linux server to by scp command
-unzip this file 
-mv this file /opt/mohan/nexus/bin
+then copy to linux server using scp command
+unzip <file> 
+mv <file> /opt/nexus/bin
 ./nexus start
 go to vi nexus file
 then go to 23 line
@@ -16,7 +16,7 @@ the login nexus un:admin pwd:admin123
 then go to maven /opt/maven/conf/setting.xml
 and add 
 <server>   
-    <id>890423</id>   
+  <id>nexus</id>   
   <username>admin</username>
   <password>admin123</password>
 </server>
@@ -33,30 +33,27 @@ and add
   <password>admin123</password>
  </server>
 
-give line no111
-past it update it
+
 
 then goto jenkins 
 goto configure settings------->plugin manager---->goto available search nexus
-nexus arfact uploader---->intall without restart
+nexus artifact uploader---->install without restart
 
-to install manually plggins click on tghis link
+To install manually pluggins click on this link
 https://support.sonatype.com/hc/en-us/articles/227256688-How-do-I-configure-the-Nexus-Jenkins-Plugin
 then download
-manage genkins -----manage pliggins ----->advance ----upload pluggingd
+manage jenkins -----manage pluggins ----->advance ----upload pluggins
 upload and check
-upload
-then go to git
 update code in github then 
 goto jenkins manage jenkins-> configure system
-search for nexus nonarq nexas add
-give server id 
+search for Sonatype Nexus
+give <server id> 
 then give http://localhost:8081/nexus
-then password user name
-add
+then provide credentials
+click add
 click on connection
 
-then goto new jo string 
+then goto new job string 
 
 
 
